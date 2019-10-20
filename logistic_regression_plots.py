@@ -28,6 +28,7 @@ def conf_matrix(lr=lr, X_train=None, y_train=None):
         tpr_list.append(sensitivity)
     return conf_matrix, fpr_list, tpr_list
 
+
 def roc_curve(fpr_lst, tpr_lst):
      
     # Plot logesitc regression -- Seaborns Beautiful Styling
