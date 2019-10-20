@@ -28,7 +28,7 @@ def conf_matrix(lr=lr, X_train=None, y_train=None):
         tpr_list.append(sensitivity)
     return conf_matrix, fpr_list, tpr_list
 
-def plot_roc(fpr_lst, tpr_lst):
+def roc_curve(fpr_lst, tpr_lst):
      
     # Plot logesitc regression -- Seaborns Beautiful Styling
     sns.set_style("darkgrid", {"axes.facecolor": ".9"})

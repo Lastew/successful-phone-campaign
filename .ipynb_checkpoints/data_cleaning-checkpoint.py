@@ -24,18 +24,28 @@ def education(df3):
 #                                                       'baisc.6y': 'basic',
 #                                                       'basic.4y': 'basic'
 #                                                      })
-    df3['education']=np.where(df3['education'] =='basic.6y', 'basic', df3['education'])
+    df3['education']=np.where(df3['education'] =='basic.9y', 'basic', df3['education'])
     df3['education']=np.where(df3['education'] =='basic.6y', 'basic', df3['education'])
     df3['education']=np.where(df3['education'] =='basic.4y', 'basic', df3['education'])
     
     return df3
 
-def cleaning_data(df):
-#     drop_duplicate = check_duplicates(df)
-    convert_to_seasons = seasons(df)
-    cleaned_data = education(convert_to_seasons)
+def select_features(df4):
+    x_feats = ['age', 'job', 'marital', 'education', 'housing', 'loan',
+       'contact', 'month', 'day_of_week', 'campaign', 'previous', 'poutcome', 'y']
+    bank = df4[x_feats]
+    bank = bank.rename(columns={'y': 'target'})
+    bank.target = bank.target.map({'no':0, 'yes':1})
     
-    return cleaned_data
+    return bank
+
+def cleand_data(df):
+    drop_duplicate = check_duplicates(df)
+    seasoned = seasons(drop_duplicate)
+    educated = education(seasoned)
+    features = select_features(educated)
+    
+    return features
     
     
 #      s.map({'cat': 'kitten', 'dog': 'puppy'})
