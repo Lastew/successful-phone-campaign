@@ -1,3 +1,6 @@
+from sklearn.preprocessing import StandardScaler
+
+
 """ Minimize the cost."""
 
 def minimize_cost(num_thres=100, p_fp=3, p_tn=0.5, p_tp=1, p_fn=2,
@@ -102,3 +105,6 @@ def cross_validation(n, shuffle=True, lr=None):
              cv_l1['test_score'].reshape(-1, 1)), axis=1)
 
         return l1_result
+
+    
+
