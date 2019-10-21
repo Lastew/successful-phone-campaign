@@ -31,7 +31,7 @@ def education(df3):
     return df3
 
 def select_features(df4):
-    x_feats = ['age', 'job', 'marital', 'education', 'housing', 'loan',
+    x_feats = ['age', 'job', 'marital', 'education', 'default', 'housing', 'loan',
        'contact', 'season', 'day_of_week', 'campaign', 'previous', 'poutcome', 'y']
     bank = df4[x_feats]
     bank = bank.rename(columns={'y': 'target'})
