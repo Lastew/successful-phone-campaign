@@ -12,7 +12,7 @@ def check_duplicates(df1):
 
 def seasons(df2):
     
-    df2.loc[:, 'month'] = df2['month'].map({'dec': 'winter', 'jan': 'winter', 'feb': 'winter',
+    df2.loc[:, 'season'] = df2['month'].map({'dec': 'winter', 'jan': 'winter', 'feb': 'winter',
                                                'mar': 'spring', 'apr': 'spring', 'may': 'spring',
                                                'jun': 'summer',  'jul': 'summer', 'aug': 'summer',
                                                'sep': 'fall', 'oct': 'fall', 'nov': 'fall'
@@ -31,19 +31,24 @@ def education(df3):
     return df3
 
 def select_features(df4):
-    x_feats = ['age', 'job', 'marital', 'education', 'housing', 'loan',
-       'contact', 'month', 'day_of_week', 'campaign', 'previous', 'poutcome', 'y']
+#     x_feats = ['age', 'job', 'marital', 'education', 'loan',
+#        'contact', 'season', 'day_of_week', 'campaign', 'pdays', 'previous', 'poutcome', 'y']
+    x_feats = ['age', 'job', 'marital', 'education', 'default', 'housing','loan',
+       'contact', 'month', 'day_of_week', 'duration', 'campaign', 'pdays',
+       'previous', 'poutcome', 'y']
+    
     bank = df4[x_feats]
     bank = bank.rename(columns={'y': 'target'})
     bank.target = bank.target.map({'no':0, 'yes':1})
     
     return bank
 
-def cleand_data(df):
+def cleaned_data(df):
     drop_duplicate = check_duplicates(df)
     seasoned = seasons(drop_duplicate)
     educated = education(seasoned)
     features = select_features(educated)
+    features.to_csv('data/clean_data.csv')
     
     return features
     

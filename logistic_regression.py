@@ -1,3 +1,13 @@
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import StratifiedKFold
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import StratifiedKFold
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import cross_validate, cross_val_score
+import numpy as np
+
 """ Minimize the cost."""
 
 def minimize_cost(num_thres=100, p_fp=3, p_tn=0.5, p_tp=1, p_fn=2,
@@ -41,7 +51,7 @@ def minimize_cost(num_thres=100, p_fp=3, p_tn=0.5, p_tp=1, p_fn=2,
 
 """Cross validation."""
 
-def cross_validation(n, shuffle=True, lr=None):
+def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None):
     """Cross validate logistic regression model n times."""
     "Retutns the train (index[0]) and test (index[1]) scores for chosen lr model"
 
@@ -102,3 +112,6 @@ def cross_validation(n, shuffle=True, lr=None):
              cv_l1['test_score'].reshape(-1, 1)), axis=1)
 
         return l1_result
+
+    
+
