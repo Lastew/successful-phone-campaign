@@ -1,4 +1,5 @@
 from sklearn.preprocessing import StandardScaler
+<<<<<<< HEAD
 from sklearn.model_selection import StratifiedKFold
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
@@ -7,6 +8,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.model_selection import cross_validate, cross_val_score
 import numpy as np
+=======
+>>>>>>> 16a2460cadbef807ad88e8d5b056759d77a02217
 from sklearn.metrics import f1_score, accuracy_score, recall_score, precision_score
 
 """ Minimize the cost."""
@@ -115,6 +118,12 @@ def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None):
         return l1_result, l1_reg, cv_l1
 
     
+"""Printing metric scores"""   
+def print_metrics(y_train, y_hat):
+    print(f"precision = {round(precision_score(y_train, y_hat),2)}")
+    print(f"recall = {round(recall_score(y_train, y_hat),2)}")
+    print(f"accuracy = {round(precision_score(y_train, y_hat),2)}")
+    print(f"f1 score = {round(f1_score(y_train, y_hat),2)}")
 
 
 

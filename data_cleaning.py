@@ -31,13 +31,20 @@ def education(df3):
     return df3
 
 def select_features(df4):
+<<<<<<< HEAD
 #     x_feats = ['age', 'job', 'marital', 'education', 'loan',
 #        'contact', 'season', 'day_of_week', 'campaign', 'pdays', 'previous', 'poutcome', 'y']
     x_feats = ['age', 'job', 'marital', 'education', 'default', 'housing','loan', 'contact', 'month', 'day_of_week', 'duration', 'campaign', 'pdays', 'previous', 'poutcome', 'y']
     
+=======
+    x_feats = ['age', 'job', 'marital', 'education', 'default', 'housing','loan',
+       'contact', 'month', 'day_of_week', 'campaign', 'pdays',
+       'previous', 'poutcome', 'y']
+>>>>>>> 16a2460cadbef807ad88e8d5b056759d77a02217
     bank = df4[x_feats]
     bank = bank.rename(columns={'y': 'target'})
     bank.target = bank.target.map({'no':0, 'yes':1})
+    bank.pdays = [0 if x==999 else 1 for x in bank['pdays']]
     
     return bank
 
