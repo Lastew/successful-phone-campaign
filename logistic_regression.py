@@ -1,5 +1,5 @@
 from sklearn.preprocessing import StandardScaler
-
+from sklearn.metrics import f1_score, accuracy_score, recall_score, precision_score
 
 """ Minimize the cost."""
 
@@ -107,4 +107,10 @@ def cross_validation(n, shuffle=True, lr=None):
         return l1_result
 
     
+"""Printing metric scores"""   
+def print_metrics(y_train, y_hat):
+    print(f"precision = {round(precision_score(y_train, y_hat),2)}")
+    print(f"recall = {round(recall_score(y_train, y_hat),2)}")
+    print(f"accuracy = {round(precision_score(y_train, y_hat),2)}")
+    print(f"f1 score = {round(f1_score(y_train, y_hat),2)}")
 
