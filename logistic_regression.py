@@ -1,5 +1,4 @@
 from sklearn.preprocessing import StandardScaler
-<<<<<<< HEAD
 from sklearn.model_selection import StratifiedKFold
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
@@ -7,9 +6,9 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.model_selection import cross_validate, cross_val_score
+from sklearn.metrics import confusion_matrix
 import numpy as np
-=======
->>>>>>> 16a2460cadbef807ad88e8d5b056759d77a02217
+
 from sklearn.metrics import f1_score, accuracy_score, recall_score, precision_score
 
 """ Minimize the cost."""
@@ -55,7 +54,7 @@ def minimize_cost(num_thres=100, p_fp=3, p_tn=0.5, p_tp=1, p_fn=2,
 
 """Cross validation."""
 
-def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None):
+def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None, C = 1):
     """Cross validate logistic regression model n times."""
     "Retutns the train (index[0]) and test (index[1]) scores for chosen lr model"
 
@@ -63,7 +62,7 @@ def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None):
 
     # vanilla cross validation
     if lr == 'vanilla':
-        lr_vanilla = LogisticRegression(C=1e9,
+        lr_vanilla = LogisticRegression(C=C,
                                         solver='newton-cg',
                                         max_iter=1000)
 
@@ -82,7 +81,7 @@ def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None):
 
     # l2 or ridge cross validation
     if lr == 'l2':
-        l2_reg = LogisticRegression(C=1,
+        l2_reg = LogisticRegression(C=C,
                                     solver='newton-cg',
                                     max_iter=1000)
 
@@ -100,7 +99,7 @@ def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None):
 
     # l1 or lasso cross validation
     if lr == 'l1':
-        l1_reg = LogisticRegression(C=1,
+        l1_reg = LogisticRegression(C=C,
                                     solver='saga',
                                     penalty='l1',
                                     max_iter=1000)
@@ -120,16 +119,20 @@ def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None):
     
 """Printing metric scores"""   
 def print_metrics(y_train, y_hat):
-    print(f"precision = {round(precision_score(y_train, y_hat),2)}")
-    print(f"recall = {round(recall_score(y_train, y_hat),2)}")
-    print(f"accuracy = {round(precision_score(y_train, y_hat),2)}")
-    print(f"f1 score = {round(f1_score(y_train, y_hat),2)}")
+    print(f"precision = {round(precision_score(y_train, y_hat),3)}")
+    print(f"recall = {round(recall_score(y_train, y_hat),3)}")
+    print(f"accuracy = {round(precision_score(y_train, y_hat),3)}")
+    print(f"f1 score = {round(f1_score(y_train, y_hat),3)}")
+    lst = [round(precision_score(y_train, y_hat), 3), round(recall_score(y_train, y_hat), 3),
+           round(precision_score(y_train, y_hat), 3), round(f1_score(y_train, y_hat), 3)]
+    pass
+    # return lst
 
 
 
-def print_metrics(y_train, y_hat, lr_reg=None):
-    print(f"precision = {round(precision_score(y_train, y_hat),2)}")
-#     print(f"score = {round(lr.score(y_train, y_hat),2)}")
-    print(f"recall = {round(recall_score(y_train, y_hat),2)}")
-    print(f"accuracy = {round(precision_score(y_train, y_hat),2)}")
-    print(f"f1 score = {round(f1_score(y_train, y_hat),2)}")
+# def print_metrics(y_train, y_hat, lr_reg=None):
+#     print(f"precision = {round(precision_score(y_train, y_hat),2)}")
+# #     print(f"score = {round(lr.score(y_train, y_hat),2)}")
+#     print(f"recall = {round(recall_score(y_train, y_hat),2)}")
+#     print(f"accuracy = {round(precision_score(y_train, y_hat),2)}")
+#     print(f"f1 score = {round(f1_score(y_train, y_hat),2)}")
