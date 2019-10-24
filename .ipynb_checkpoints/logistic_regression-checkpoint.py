@@ -1,3 +1,5 @@
+"""Mod4 Module"""
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedKFold
 from sklearn.linear_model import LogisticRegression
@@ -13,9 +15,10 @@ from sklearn.metrics import f1_score, accuracy_score, recall_score, precision_sc
 
 """ Minimize the cost."""
 
-def minimize_cost(num_thres=100, p_fp=3, p_tn=0.5, p_tp=1, p_fn=2,
+def minimize_cost(num_thres=100, p_fp=2, p_tn=0.5, p_tp=1, p_fn=2,
                   lr=None, X_train=None, y_train=None):
-    """Returns fpr, tpr, cost, and _thres. This function is to minimize the cost function."""
+    """Returns False Posetive rate, True Posetive rate, the cost and _threshold.
+    This function is to minimize the cost function."""
     _thres = []
     tpr = []
     fpr = []
@@ -118,21 +121,15 @@ def cross_validation(n, shuffle=True, lr=None, X_train=None, y_train=None, C = 1
 
     
 """Printing metric scores"""   
+
 def print_metrics(y_train, y_hat):
+    """Prints precision, recall, accuracy and f1 scores."""
+    
     print(f"precision = {round(precision_score(y_train, y_hat),3)}")
     print(f"recall = {round(recall_score(y_train, y_hat),3)}")
-    print(f"accuracy = {round(precision_score(y_train, y_hat),3)}")
+    print(f"accuracy = {round(accuracy_score(y_train, y_hat),3)}")
     print(f"f1 score = {round(f1_score(y_train, y_hat),3)}")
     lst = [round(precision_score(y_train, y_hat), 3), round(recall_score(y_train, y_hat), 3),
            round(precision_score(y_train, y_hat), 3), round(f1_score(y_train, y_hat), 3)]
     pass
-    # return lst
-
-
-
-# def print_metrics(y_train, y_hat, lr_reg=None):
-#     print(f"precision = {round(precision_score(y_train, y_hat),2)}")
-# #     print(f"score = {round(lr.score(y_train, y_hat),2)}")
-#     print(f"recall = {round(recall_score(y_train, y_hat),2)}")
-#     print(f"accuracy = {round(precision_score(y_train, y_hat),2)}")
-#     print(f"f1 score = {round(f1_score(y_train, y_hat),2)}")
+ 
