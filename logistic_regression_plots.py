@@ -117,6 +117,7 @@ def plot_confusion_matrix(cm, classes, normalize=False, cmap=plt.cm.Blues):
     plt.tight_layout()
     plt.ylabel('True label', fontsize=15)
     plt.xlabel('Predicted label', fontsize=15)
+    plt.grid(None)
 
 
 def pre_recall_curve(rec_lst, pre_lst):
